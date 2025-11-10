@@ -5,25 +5,20 @@ services:
     build:
       # Dockerfileのあるディレクトリを指定する
       context: ./backend
-
     # コンテナ起動時に実行するコマンド
     command: bash -c "rails s -b 0.0.0.0"
-
     # ローカルのファイルとコンテナのファイルを共有する
     volumes:
       - ./backend:/myapp
-
+    working_dir: /myapp
     # Railsのポート番号
     ports:
       - 3000:3000
-
     # PostgreSQLのコンテナが起動してからRailsのコンテナを起動する
     depends_on:
       - db
-
     # 標準入出力を扱う
     tty: true
-
     # 標準入力を扱う
     stdin_open: true
   # Reactのコンテナ
@@ -41,9 +36,9 @@ services:
     stdin_open: true
     # ローカルのファイルとコンテナのファイルを共有する
     volumes:
-      - ./frontend:/frontend_app
+      - ./frontend:/app
     # 作業ディレクトリを指定
-    working_dir: /frontend_app
+    working_dir: /app
     # ポート番号
     ports:
     - "8000:3000"

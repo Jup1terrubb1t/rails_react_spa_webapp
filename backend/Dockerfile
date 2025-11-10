@@ -4,6 +4,10 @@ FROM ruby:3.1.2
 # 必要なパッケージをインストールする
 RUN apt-get update -qq && apt-get install -y vim postgresql-client
 
+#  Nodeインストール
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+  && apt-get install -y nodejs
+
 # コンテナで作業するディレクトリを指定する（ディレクトリがなければ作成する）
 WORKDIR /myapp
 
@@ -11,10 +15,10 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 
-# Gemの依存関係をインストールする（= Railsのgemをインストールする）
+# gemをインストールル
 RUN bundle install
 
-# ローカルのカレントディレクトリをコンテナのappディレクトリに保存する（=Railsアプリをコンテナにコピーする）
+# ローカルのカレントディレクトリをコンテナのappディレクトリに保存する
 COPY . /myapp
 
 # entrypoint.shをコンテナにコピーする
