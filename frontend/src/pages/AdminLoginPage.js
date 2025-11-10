@@ -21,8 +21,8 @@ const AdminLoginPage = () => {
     try {
       //DeviseにAPIを送る
       const res = await axios.post(
-        //DeviseのログインURL
-        "http://localhost:3000/users/sign_in",
+        //DeviseのログインURL　パスワードとメールアドレスが正しいか確認
+        "http://localhost:3000/api/login",
         {
           user: {
             email: email,
@@ -31,7 +31,12 @@ const AdminLoginPage = () => {
         },
         {
           // Cookieをフロントに保存(ログイン状態維持)
-          withCredentials: true, 
+          withCredentials: true,
+          // Reactにjsonとして認識してもらうため
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
         }
       );
       //Railsがstatus=200(成功)であれば
