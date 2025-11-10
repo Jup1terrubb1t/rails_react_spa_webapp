@@ -53,6 +53,12 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  Rails.application.configure do
+    config.session_store :cookie_store,
+      key: '_myapp_session',
+      same_site: :none,
+      secure: false   # HTTP 開発
+  end
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

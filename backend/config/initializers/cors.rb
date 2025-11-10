@@ -15,12 +15,14 @@
 #   end
 # end
 
+# CORSをRail側で許可する設定
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'http://localhost:8000'
     resource '*', 
               headers: :any, 
               credentials: true,  # ← Cookieを許可！
+              expose: ["Set-Cookie"], # ← ReactがSet-Cookieを読めるようにする
               methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
