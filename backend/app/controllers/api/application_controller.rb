@@ -7,7 +7,8 @@ module Api
     include ActionController::Cookies
     # セキュリティ関連の処理を使える状態をON
     include ActionController::RequestForgeryProtection
-    # CSRFトークンなしのPOSTを許可 (SPAからのAPIリクエストはCSRFトークンがつかない)
-    protect_from_forgery with: :null_session
+    # CSRFトークンなしのPOSTはJSONリクエストの場合のみ許可
+    # unless: -> { request.format.json? }をつけないとDELETEやINSERT出来ない。
+    protect_from_forgery with: :null_session, unless: -> { request.format.json? }
   end
 end
