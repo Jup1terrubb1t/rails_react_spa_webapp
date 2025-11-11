@@ -3,9 +3,10 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Category from './components/Category';//カテゴリ一覧
 import AdminLoginPage from "./pages/AdminLoginPage.jsx";//管理者ログイン
 import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";//管理者ダッシュボード
+import AdminCategoriesPage from "./pages/AdminCategoriesPage.jsx";//管理者カテゴリ管理
 import { AuthProvider } from "./auth/AuthContext"; //認証Context
 import PrivateRoute from "./auth/PrivateRoute"; //ログイン必須のルート
-import { useCategories } from "./hooks/useCategories";
+import { useCategories } from "./hooks/useCategories";//カテゴリ一覧取得
 
 
 // どのURLの時にどの画面を表示させるか(Reactアプリで最初に呼ばれるところ)
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/admin/dashboard" element={<PrivateRoute><AdminDashboardPage /></PrivateRoute>}/>
+        <Route path="/admin/categories" element={<PrivateRoute><AdminCategoriesPage /></PrivateRoute>}/>
       </Routes>
     </AuthProvider>
   );
