@@ -48,6 +48,12 @@ class Api::SessionsController < Api::ApplicationController
       }
     }, status: :ok
   end
+  
+  # DELETE /api/logout
+  def destroy
+    sign_out(current_user)
+    render json: { message: "ログアウトしました" }, status: :ok
+  end
 
   # GET /api/me
   def me
