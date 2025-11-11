@@ -30,11 +30,11 @@ export const AuthProvider = ({ children }) => {
     };
     checkLogin();
   }, []);
-  
+
   // (非同期) ログアウト
   const logout = async () => {
     //サインアウト(待機)
-    await api.delete("/users/sign_out");
+    await api.delete("/api/logout", { withCredentials: true });
     //未ログイン
     setUser(null);
   };
