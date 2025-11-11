@@ -1,8 +1,8 @@
 import { Button, Center, Box, CheckboxGroup, Text } from "@chakra-ui/react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Category from './components/Category';//カテゴリ一覧
-import AdminLoginPage from "./pages/AdminLoginPage";//管理者ログイン
-import AdminDashboardPage from "./pages/AdminDashboardPage";//管理者ダッシュボード
+import AdminLoginPage from "./pages/AdminLoginPage.jsx";//管理者ログイン
+import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";//管理者ダッシュボード
 import { AuthProvider } from "./auth/AuthContext"; //認証Context
 import PrivateRoute from "./auth/PrivateRoute"; //ログイン必須のルート
 import { useCategories } from "./hooks/useCategories";
