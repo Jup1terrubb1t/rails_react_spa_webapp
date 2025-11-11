@@ -1,6 +1,6 @@
 import { useState } from "react";//入力値保持
 import { useNavigate } from "react-router-dom";//ページ遷移
-import axios from "axios";//RailsにログインAPIを送る
+import api from "../api/axios";//RailsにログインAPIを送る
 import { Box, Heading, Input, Button, Text } from "@chakra-ui/react";//UI
 
 //------------------------------------
@@ -19,34 +19,17 @@ const AdminLoginPage = () => {
   const handleLogin = async () => {
     setErrorMsg("");//メッセージ初期化
     try {
-      //DeviseにAPIを送る
-      const res = await axios.post(
-        //DeviseのログインURL　パスワードとメールアドレスが正しいか確認
-        "http://localhost:3000/api/login",
-        {
-          user: {
-            email: email,
-            password: password,
-          },
-        },
-        {
-          // Cookieをフロントに保存(ログイン状態維持)
-          withCredentials: true,
-          // Reactにjsonとして認識してもらうため
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-        }
-      );
-      //Railsがstatus=200(成功)であれば
-      if (res.status === 200) {
-        //ログイン画面に遷移
-        navigate("/admin/dashboard"); 
-      }
+        // ログイン(エラー判定はrails)
+        await api.post("/api/login", { user: { email, password } });
+        // ログイン成功したら、ユーザー情報を取得
+        const userRes = await api.get("/api/current_user");
+        console.log("ログイン中ユーザー:", userRes.data);
+        // 成功したらダッシュボードへ遷移
+        navigate("/admin/dashboard");
     } catch (error) {
-      console.log(error);
-      setErrorMsg("メールアドレスまたはパスワードが違います");
+      console.error("ログインエラー:", error);
+      const msg =error.response?.data?.error?.message ||"エラーが発生しました。";
+      setErrorMsg(msg);
     }
   };
 
