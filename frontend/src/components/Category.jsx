@@ -1,16 +1,12 @@
 import { Box, Button } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 
-const Category = ({ id, name }) => {
-  const navigate = useNavigate();
-  const handleClick = () => {navigate(`/categories/${id}`);};
+const Category = ({ id, name ,onClick}) => {
   return (
     <Box mb="16px">
-      <Button colorScheme="blue" size="lg" onClick={handleClick}>
+      <Button colorScheme="blue" size="lg" onClick={onClick}>
         {name}
       </Button>
     </Box>
   );
 };
-// 他のファイルでコンポーネントを使用するための宣言
 export default Category;
