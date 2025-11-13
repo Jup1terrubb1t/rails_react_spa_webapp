@@ -22,15 +22,20 @@
 - 非表示の投稿を再表示することが出来る
 
 ## 使用技術
-### フロントエンド
-- React 18
-- Chakra UI
-- Axios
 
-### バックエンド
-- Ruby on Rails 7
-- Devise（管理者認証）
-- PostgreSQL
+### Backend（Rails）
+- Ruby: **3.1.2p20**
+- Rails: **7.0.10**
+- Devise: **4.9.4**
+- PostgreSQL（gem pg）: **1.6.2**
+- Puma: **7.1.0**
+- Bundler: **2.3.7**
+
+### Frontend（React）
+- React: **18.2.0**
+- Chakra UI: **2.8.2**
+- Axios: **1.13.2**
+- Node.js（Docker）: **19.4.0**
 
 ### インフラ
 - Docker Compose（Rails・React・PostgreSQL）
