@@ -53,13 +53,22 @@
 - git clone https://github.com/Jup1terrubb1t/rails_react_spa_webapp.git
 - cd　rails_react_spa_webapp
 
-### 2. Docker を起動
-docker compose up -d
+### 2. Docker イメージのビルド
+- docker compose build
 
-### 3. ブラウザでアクセス
+### 3. Docker を起動
+- docker compose up -d
+
+### 4. DB の初期化（初回のみ）
+- docker compose exec backend rails db:create db:migrate db:seed
+
+### アクセス URL
 - フロント → http://localhost:8000  
 - バックエンド API → http://localhost:3000 
 
-## 管理者ログイン　（テスト用）
+### Docker停止
+- docker compose down
+
+## 管理者ログイン　（seed の内容）
 - メールアドレス：admin@example.com
 - パスワード：p@ssword
