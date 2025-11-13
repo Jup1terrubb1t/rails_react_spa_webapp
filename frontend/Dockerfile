@@ -1,4 +1,4 @@
-FROM node:19.4.0
+FROM node:18
 
 # コンテナ内で React が動く作業ディレクトリ
 WORKDIR /app
