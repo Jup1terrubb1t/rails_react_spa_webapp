@@ -13,8 +13,11 @@ class Api::PostsController < Api::ApplicationController
   end
   # 投稿作成:一般ユーザー用
   def create
+    Rails.logger.info("=== 投稿作成時のセッション ===")
+    Rails.logger.info("session[:visitor_token] (before): #{session[:visitor_token]}")
     @post = Post.new(post_params)
     @post.session_token = session[:visitor_token] ||= SecureRandom.hex(16)
+    Rails.logger.info("session[:visitor_token] (after): #{session[:visitor_token]}")
     @post.hidden = false
     if @post.save
       render json: @post, status: :created
@@ -25,6 +28,10 @@ class Api::PostsController < Api::ApplicationController
   # 投稿非表示：投稿者用
   def hide
     post = Post.find(params[:id])
+    Rails.logger.info("セッション確認")
+    Rails.logger.info("post.session_token: #{post.session_token}")
+    Rails.logger.info("session[:visitor_token]: #{session[:visitor_token]}")
+    Rails.logger.info("Cookie全体: #{request.cookies.inspect}")
     if post.session_token == session[:visitor_token]
       post.update(hidden: true)
       render json: { message: "非表示にしました" }
