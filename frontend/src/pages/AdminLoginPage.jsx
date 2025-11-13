@@ -2,6 +2,7 @@ import { useState } from "react";//入力値保持
 import { useNavigate } from "react-router-dom";//ページ遷移
 import api from "../api/axios";//RailsにログインAPIを送る
 import { Box, Heading, Input, Button, Text } from "@chakra-ui/react";//UI
+import { useAuth } from "../auth/AuthContext";
 
 //------------------------------------
 // 管理者ログインページのコンポーネント作成
@@ -14,6 +15,7 @@ const AdminLoginPage = () => {
   const [email, setEmail] = useState("");//メールアドレス
   const [password, setPassword] = useState("");//パスワード
   const [errorMsg, setErrorMsg] = useState("");//エラーメッセージ
+  const { setUser } = useAuth();
 
   //ログイン時
   const handleLogin = async () => {
@@ -23,7 +25,8 @@ const AdminLoginPage = () => {
         await api.post("/api/login", { user: { email, password } });
         // ログイン成功したら、ユーザー情報を取得
         const userRes = await api.get("/api/current_user");
-        console.log("ログイン中ユーザー:", userRes.data);
+        //ログイン成功時に setUser()を呼ぶ
+        setUser(userRes.data.user);
         // 成功したらダッシュボードへ遷移
         navigate("/admin/dashboard");
     } catch (error) {
