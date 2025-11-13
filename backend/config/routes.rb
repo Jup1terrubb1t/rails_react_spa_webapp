@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       end
     end
     get "posts/admin_index", to: "posts#admin_index"
+    # 訪問管理
+    get "current_visitor"  , to: "visitors#show"
     # ログ汚染対策
     get "/ws", to: proc { [200, {}, [""]] }
   end
