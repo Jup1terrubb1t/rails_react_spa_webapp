@@ -63,8 +63,3 @@ docker compose up -d
 ## 管理者ログイン　（テスト用）
 - メールアドレス：admin@example.com
 - パスワード：p@ssword
-
-- Cookie が ON の状態で確認してください
-- 投稿者判定は `visitorToken`（セッションCookie）で行います
-- 非表示にした投稿は一般ユーザーから完全に非表示になります
-- 管理画面ではすべての投稿を確認できます（非表示含む）
