@@ -5,13 +5,13 @@
 ・登場人物：投稿者、管理者
 
 ・掲示板機能
-  　-「カテゴリ」があり、上記ユーザーは「カテゴリ」ごとにテキストを投稿できる
-  　-投稿するときは「名前／メールアドレス／件名／本文」が入力可能
-  　-本文以外は任意項目
-  　-一度投稿されたテキストは編集／削除不可
-  　-投稿者だけ非表示にできる
-  　-非表示になった投稿は全員から見えない
-  　-投稿者の判定はセッションCookieを使用する
+- 「カテゴリ」があり、上記ユーザーは「カテゴリ」ごとにテキストを投稿できる
+- 投稿するときは「名前／メールアドレス／件名／本文」が入力可能
+- 本文以外は任意項目
+- 一度投稿されたテキストは編集／削除不可
+- 投稿者だけ非表示にできる
+- 非表示になった投稿は全員から見えない
+- 投稿者の判定はセッションCookieを使用する
 
 ・管理機能
   　-管理者のみアクセス可能
@@ -45,8 +45,8 @@ docker-compose.yml → 開発環境構築用
 
 ## 起動方法(ローカル実行)
 ### 1. リポジトリをクローン
-git clone https://github.com/Jup1terrubb1t/rails_react_spa_webapp.git
-cd　rails_react_spa_webapp
+- git clone https://github.com/Jup1terrubb1t/rails_react_spa_webapp.git
+- cd　rails_react_spa_webapp
 
 ### 2. Docker を起動
 docker compose up -d
