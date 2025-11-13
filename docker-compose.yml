@@ -37,6 +37,7 @@ services:
     # ローカルのファイルとコンテナのファイルを共有する
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     # 作業ディレクトリを指定
     working_dir: /app
     # ポート番号
