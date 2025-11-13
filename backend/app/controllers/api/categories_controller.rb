@@ -35,6 +35,19 @@ class Api::CategoriesController < Api::ApplicationController
     category.destroy
     render json: { message: "削除しました" }
   end
+  # COUNT categories/with_counts (管理者専用)
+  def with_counts
+    categories = Category.all.includes(:posts).map do |cat|
+      {
+        id: cat.id,
+        name: cat.name,
+        total_posts: cat.posts.count,
+        visible_posts: cat.posts.where(hidden: false).count,
+        hidden_posts: cat.posts.where(hidden: true).count
+      }
+    end
+    render json: categories
+  end
   private
   def category_params
     params.require(:category).permit(:name, :description)

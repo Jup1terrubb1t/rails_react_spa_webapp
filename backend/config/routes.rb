@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     post   "login",        to: "sessions#create"
     delete "logout",       to: "sessions#destroy"
     # カテゴリ CRUD
-    resources :categories
+    resources :categories                                      #カテゴリ一覧
+    get "categories_with_counts", to: "categories#with_counts" #カテゴリ数
     # 投稿（index, create のみ想定）
     resources :posts, only: [:index, :create] do
       member do
