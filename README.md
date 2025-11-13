@@ -35,7 +35,7 @@
 - React: **18.2.0**
 - Chakra UI: **2.8.2**
 - Axios: **1.13.2**
-- Node.js（Docker）: **19.4.0**
+- Node.js（Docker）: **18**
 
 ### インフラ
 - Docker Compose（Rails・React・PostgreSQL）
