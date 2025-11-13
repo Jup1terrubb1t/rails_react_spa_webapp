@@ -1,6 +1,5 @@
 import {Box,Button,HStack,VStack,Text,Badge} from "@chakra-ui/react";
-// 投稿一覧を表示する汎用コンポーネント
-const PostList = ({ posts, onUnhide, admin = false }) => {
+const PostList = ({ posts, onUnhide, onHide, admin = false, visitorToken }) => {
   if (!posts.length) {
     return <Text>投稿がありません。</Text>;
   }
@@ -17,8 +16,13 @@ const PostList = ({ posts, onUnhide, admin = false }) => {
             {post.name || "匿名"}（{post.email || "メールなし"}）
           </Text>
           <Text mt="4px">{post.body}</Text>
+          {/* 管理者専用；再表示ボタン */}
           {admin && post.hidden && (
             <Button size="sm" mt="8px" colorScheme="blue" onClick={() => onUnhide(post.id)}>再表示</Button>
+          )}
+          {/* 自分の投稿専用：非表示ボタン */}
+            {!admin && post.session_token === visitorToken && !post.hidden && (
+            <Button size="sm" mt="8px" colorScheme="red" onClick={() => onHide?.(post.id)}>非表示</Button>
           )}
         </Box>
       ))}
