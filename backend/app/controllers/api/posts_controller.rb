@@ -1,5 +1,5 @@
 class Api::PostsController < Api::ApplicationController
-  before_action :authenticate_user!, only: [:unhide]  # 管理者専用
+  before_action :authenticate_user!, only: [:unhide, :admin_index] 
 
   # 投稿一覧:一般ユーザー用(非表示含まない)
   def index
