@@ -36,16 +36,27 @@ class Api::CategoriesController < Api::ApplicationController
     render json: { message: "削除しました" }
   end
   # COUNT categories/with_counts (管理者専用)
+  # SELECT 
+  # categories.id
+  # categories.name
+  # COUNT(post.id) AS total_posts,
+  # SUM(CASE WHEN post.hidden) = false THEN 1 ELSE 0 END ) AS visible_posts,
+  # SUM(CASE WHEN post.hidden) = true THEN 1 ELSE 0 END ) AS hidden_posts,
+  # FROM categories
+  # LEFT JOIN posts ON posts.category_id = categories.id
+  # GROUP BY categories.id;
   def with_counts
-    categories = Category.all.includes(:posts).map do |cat|
-      {
-        id: cat.id,
-        name: cat.name,
-        total_posts: cat.posts.count,
-        visible_posts: cat.posts.where(hidden: false).count,
-        hidden_posts: cat.posts.where(hidden: true).count
-      }
-    end
+    categories = Category
+    .left_joins(:posts)
+    .select("
+      categories.id,
+      categories.name,
+      COUNT(posts.id) AS total_posts,
+      SUM(CASE WHEN posts.hidden = false THEN 1 ELSE 0 END) AS visible_posts,
+      SUM(CASE WHEN posts.hidden = true THEN 1 ELSE 0 END) AS hidden_posts
+    ")
+    .group("categories.id")
+
     render json: categories
   end
   private
