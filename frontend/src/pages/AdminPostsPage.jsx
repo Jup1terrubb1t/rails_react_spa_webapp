@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Box, Heading, Select, Center, Text ,Table,Tr,Tbody,Td,Th,Thead} from "@chakra-ui/react";
 import { useCategories } from "../hooks/useCategories";
+import { useAdminCategories } from "../hooks/useAdminCategories";
 import { usePosts } from "../hooks/usePosts";
 import api from "../api/axios";
 import PostList from "../components/PostList";
 
 const AdminPostsPage = () => {
-  const { categories, categories_with_counts, loading: catLoading } = useCategories();
+  const { categories, loading: catLoading } = useCategories();
+  const { categoriesWithCount } = useAdminCategories();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const { posts, loading, refetch } = usePosts(selectedCategory, true);
 
@@ -46,7 +48,7 @@ const AdminPostsPage = () => {
               </Tr>
             </Thead>
             <Tbody>
-            {categories_with_counts
+            {categoriesWithCount
               // 選択中カテゴリだけフィルタ
               .filter(c => !selectedCategory || c.id === Number(selectedCategory))
               .map(c => (
