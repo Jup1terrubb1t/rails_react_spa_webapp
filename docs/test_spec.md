@@ -97,7 +97,7 @@
 - **結果**：OK（期待どおり）
 
 #### ■ 修正後エビデンス（After：SQLログ）
-![修正後](./images/no36_after.png)
+![修正後](./images/no35_after.png)
 
 ---
 
