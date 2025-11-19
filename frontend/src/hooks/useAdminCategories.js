@@ -9,7 +9,6 @@ export const useAdminCategories = () => {
     try {
       const res = await api.get("/api/categories_with_counts");
       setCategoriesWithCount(res.data);
-      console.log('/api/categories_with_counts',res.data);
     } catch (err) {
       console.error("管理カテゴリ取得失敗:", err);
     } finally {
@@ -20,7 +19,6 @@ export const useAdminCategories = () => {
   useEffect(() => {
     fetchAdminCategories();
   }, []);
-  console.log('categoriesWithCount',categoriesWithCount);
 
   return { categoriesWithCount, loading, refetch: fetchAdminCategories };
 };
