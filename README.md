@@ -72,3 +72,6 @@
 ## 管理者ログイン　（seed の内容）
 - メールアドレス：admin@example.com
 - パスワード：p@ssword
+
+## テスト仕様書
+[docs/test_spec.md](./docs/test_spec.md)
